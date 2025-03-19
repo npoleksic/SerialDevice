@@ -17,7 +17,7 @@ class SerialDevice {
 
     char readMessage();
     
-    bool awaitMessage(char msg, int pinToToggle);
+    bool awaitMessage(char msg, bool toggle, int pinToToggle = 0);
 
     bool messageAvailable();
 

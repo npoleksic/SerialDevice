@@ -31,7 +31,7 @@ char SerialDevice::readMessage() {
   return mChar1;
 }
 
-bool SerialDevice::awaitMessage(char msg, int pinToToggle) {
+bool SerialDevice::awaitMessage(char msg, bool toggle, int pinToToggle) {
   char header;
   int32_t lightToggleTime = 0;
 
@@ -41,7 +41,7 @@ bool SerialDevice::awaitMessage(char msg, int pinToToggle) {
       if (header == msg) {
         return true;
       }
-    } else if (millis() - lightToggleTime > 500) {
+    } else if (millis() - lightToggleTime > 500 && toggle) {
       digitalWrite(pinToToggle, !digitalRead(pinToToggle));
       lightToggleTime = millis();
     }
